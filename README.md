@@ -39,8 +39,8 @@ npm start
 ### Walkthrough
 - Signup & Login
 
-![Video Walkthrough]()
+![Video Walkthrough](https://github.com/yidea/nodejs-blog/blob/master/gif/login.gif)
 
 - Blog post create/edit/delete/view
 
-![Video Walkthrough]()
+![Video Walkthrough](https://github.com/yidea/nodejs-blog/blob/master/gif/post.gif)
