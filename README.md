@@ -6,7 +6,7 @@ Time spent: `<15 h>`
 
 ### Setup
 
-```bash
+```
 npm install
 npm start
 ```
@@ -39,8 +39,8 @@ npm start
 ### Walkthrough
 - Signup & Login
 
-![Video Walkthrough](...)
+![Video Walkthrough]()
 
 - Blog post create/edit/delete/view
 
-![Video Walkthrough](...)
+![Video Walkthrough]()
