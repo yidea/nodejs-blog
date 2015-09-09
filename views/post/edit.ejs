@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+    <title>Blogger</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body         { padding-top:80px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="col-sm-6 col-sm-offset-3">
+            <h1><%= verb %> Post</h1>
+            <!--    <a href="/logout" class="btn btn-default btn-sm">Logout</a> -->
+
+            <% if (typeof message !== 'undefined' && message.length > 0) { %>
+            <div class="alert alert-danger"><%= message %></div>
+            <% } %>
+
+            <form action="/post/<%= post.id %>" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" class="form-control" name="title" value="<%=post.title%>">
+                </div>
+                <div class="form-group">
+                    <label>Contents</label>
+                    <input type="text" class="form-control" name="content" value="<%=post.content %>">
+                </div>
+                <div class="form-group">
+                    <label>Image</label>
+                    <% if (post.image && post.image.data) { %>
+                    <img src="<%= image %>" alt="image" style="height: 200px; width: 200px"/>
+                    <% } %>
+
+                    <input type="file" class="form-control" name="image" accept="image/*">
+                </div>
+                <button type="submit" class="btn btn-warning btn-lg">Save</button>
+            </form>
+
+        </div>
+    </div>
+
+<!--
+    <div class="container">
+        <div class="comments">
+            <h5>Create Comment here:</h5>
+            <form class="form-inline comment" action="/comment" method="post">
+                <input type="hidden" name="postId" value="<%= post.id %>">
+                <div class="form-group">
+                    <label class="sr-only" for="comment">Comment</label>
+                    <input type="text" class="form-control" id="comment" name="comment" size="80" placeholder="Comment">
+                    <span id="error2" class="text-warning"></span>
+                </div>
+                <button type="submit" class="btn btn-primary pull-right">Post</button>
+            </form>
+
+
+            <h5>Comments</h5>
+            <ul class="list-group">
+                <% var comments = post.comments; %>
+                <% comments.forEach(function(comment) { %>
+                <li class="list-group-item list-group-item-text">
+                    <span class="user"><%= comment.username %></span>: <%= comment.content %>
+                </li>
+                <% }); %>
+
+            </ul>
+        </div>
+    </div> -->
+</body>

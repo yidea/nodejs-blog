@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+    <title>Blogger</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <style>
+        body         { padding-top:80px; word-wrap:break-word; }
+        .hide {
+            display: none;
+        }
+        span.postTitle, span.user{
+            font-weight: bold;
+        }
+    </style>
+    <script>
+    </script>
+</head>
+<body>
+  <div class="container">
+   <nav class="navbar navbar-default">
+       <div class="container-fluid">
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li ><a href="/profile">Profile</a></li>
+              <li><a href="/posts">All Posts</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+              <li><a href="/logout">logout</a></li>
+          </ul>
+      </div>
+  </div>
+</nav>
+</div>
+
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1>Posts <%= blogUserId %></h1>
+    </div>
+
+    <% if (typeof message !== 'undefined' && message.length > 0) { %>
+    <div class="alert alert-danger"><%= message %></div>
+    <% } %>
+
+    <% for (var i=0; i<posts.length; i++) { %>
+    <div class="row">
+        <% if (posts[i].image && posts[i].image.data) { %>
+        <img src="<%= posts[i].imageData %>" alt="image" style="height: 100px; width: 100px"/>
+        <% } %>
+        <a class="postTitle" href="/post/<%= posts[i].id%>"><%= posts[i].title %></a>
+        <span>Author:
+            <%= posts[i].userId %>
+        </span>
+        <article><%= posts[i].content %> </article>
+    </div>
+    <% } %>
+</body>
+</html>

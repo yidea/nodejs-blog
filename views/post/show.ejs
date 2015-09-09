@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+    <title>Blogger</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body         { padding-top:80px; }
+    </style>
+</head>
+<body>
+  <div class="container">
+     <nav class="navbar navbar-default">
+         <div class="container-fluid">
+
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                  <li class="active"><a href="/profile">Profile</a></li>
+                  <li><a href="/posts">All Posts</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                  <li><a href="/logout">logout</a></li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+</div>
+<div class="container">
+
+    <div class="col-sm-6 col-sm-offset-3">
+        <% if (typeof message !== 'undefined' && message.length > 0) { %>
+        <div class="alert alert-danger"><%= message %></div>
+        <% } %>
+        <% if (canEdit) { %>
+        <a type="button" class="btn btn-default btn-sm delete" href="/post/edit/<%= post.id%>">Edit</a>
+        <% } %>
+        <h1> <%=post.title%> </h1>
+        <article><%=post.content %></article>
+        <label>Image</label>
+        <% if (post.image && post.image.data) { %>
+        <img src="<%= image %>" alt="image" style="height: 200px; width: 200px"/>
+        <% } %>
+    </div>
+</div>
+<div class="container">
+    <div class="comments">
+        <h5>Create Comment here:</h5>
+        <% if (!requestUserId) { %>
+        <form class="form-inline comment" action="/logincomment" method="post" >
+            <input type="hidden" name="postId" value="<%= post.id %>">
+            <div class="form-group">
+                <label class="sr-only" for="username">Username or Email</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username or Email">
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            </div>
+
+            <div class="form-group">
+                <label class="sr-only" for="comment"> <%= requestUserId %>Comment</label>
+                <input type="text" class="form-control" id="comment" name="comment" size="80" placeholder="Comment">
+                <span id="error2" class="text-warning"></span>
+            </div>
+            <button type="submit" class="btn btn-primary pull-right">Login & Post</button>
+        </form>
+        <% } else {%>
+        <form class="form-inline logincomment" action="/comment" method="post">
+            <input type="hidden" name="postId" value="<%= post.id %>">
+            <div class="form-group">
+                <label class="sr-only" for="comment"> <%= requestUserId %>Comment</label>
+                <input type="text" class="form-control" id="comment" name="comment" size="80" placeholder="Comment">
+                <span id="error2" class="text-warning"></span>
+            </div>
+            <button type="submit" class="btn btn-primary pull-right">Post Comments</button>
+        </form>
+        <% } %>
+
+        <h5>Comments</h5>
+        <ul class="list-group">
+            <% var comments = post.comments; %>
+            <% comments.forEach(function(comment) { %>
+            <li class="list-group-item list-group-item-text">
+                <span class="user"><%= comment.username %></span>: <%= comment.content %> 
+            </li>
+            <% }); %>
+
+        </ul>
+    </div>
+</div>
+</body>
